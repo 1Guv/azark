@@ -1,0 +1,33 @@
+<div class="container">
+    <div *ngIf="addUserForm">
+        <app-offline-check (latestStatus)="latestNetworkStatus($event)"></app-offline-check>
+
+        <h1 class="fs-2 fw-bold" mat-dialog-title>Add User Dialog</h1>
+
+        <div *ngIf="addUserForm" mat-dialog-content>
+            <form [formGroup]="addUserForm" class="d-flex flex-column">
+                <mat-form-field>
+                    <mat-label>First Name</mat-label>
+                    <input matInput type="text" id="firstName" formControlName="firstName">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Last Name</mat-label>
+                    <input matInput type="text" id="lastName" formControlName="lastName">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Email</mat-label>
+                    <input matInput type="email" id="email" formControlName="email">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Phone</mat-label>
+                    <input matInput type="number" id="phone" formControlName="phone">
+                </mat-form-field>
+            </form>
+        </div>
+        <div mat-dialog-actions>
+            <button mat-raised-button color="primary" [disabled]="addUserForm.invalid" (click)="onSaveUser()">Save</button>
+        </div>
+    </div>
+</div>
+
+

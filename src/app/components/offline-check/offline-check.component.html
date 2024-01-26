@@ -1,0 +1,14 @@
+<div class="py-4">
+    <div *ngIf="isOnline else isOffline" class="offline-alert">
+        <div class="alert alert-success" role="alert">
+            You are currently online.
+        </div>
+    </div>
+    
+    <ng-template #isOffline>
+        <div class="alert alert-danger" role="alert">
+            You are currently offline!
+        </div>
+    </ng-template>
+</div>
+

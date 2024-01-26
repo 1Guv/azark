@@ -1,0 +1,107 @@
+
+<div class="container py-4 px-2">
+
+  <h1 class="fs-1 fw-bold">Users List</h1>
+  <app-offline-check (latestStatus)="latestNetworkStatus($event)"></app-offline-check>
+
+  <div class="d-flex flex-row justify-content-end mb-4">
+    <button class="mx-1" mat-raised-button (click)="clearLocalStorage()">Clear Local Storage</button>  </div>
+
+<table class="table table-bordered table-hover align-middle">
+
+    <thead class="table-light">
+      <td scope="col">Status</td>
+      <td scope="col">Id</td>
+      <td scope="col">First Name</td>
+      <td scope="col">Name</td>
+      <td scope="col">Email</td>
+      <td scope="col">Phone</td>
+      <td scope="col">Actions</td>
+    </thead>
+    <tbody *ngFor="let user of users$ | async">
+      <tr>
+        <td scope="row">
+          {{ user.status ? 'Synched' : 'Not Synched' }}
+          <!-- {{ user.status }} -->
+        </td>
+        <td scope="row">
+          {{ user.id }})
+        </td>
+        <td scope="row">
+          {{user.firstName}}
+        </td>
+        <td scope="row">
+          {{user.lastName}}
+        </td>
+        <td scope="row">
+          {{user.email}}
+        </td>
+        <td scope="row">
+          {{user.phone}}
+        </td>
+        <td scope="row">
+          <button mat-raised-button color="warn" (click)="onDelete(user)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td>Total Users: {{ (users$ | async)?.length }}</td>
+      </tr>
+    </tfoot>
+</table>
+
+<ng-container *ngIf="isUserDataAvailable()">
+  <table class="table table-bordered table-hover align-middle">
+    <thead class="table-light">
+      <td scope="col">Status</td>
+      <td scope="col">Id</td>
+      <td scope="col">First Name</td>
+      <td scope="col">Name</td>
+      <td scope="col">Email</td>
+      <td scope="col">Phone</td>
+      <td scope="col">Actions</td>
+    </thead>
+    <tbody *ngFor="let user of localStorageUsers">
+      <tr>
+        <td scope="row">
+          {{ user.status ? 'Synched' : 'Not Synched' }}
+          <!-- {{ user.status }} -->
+        </td>
+        <td scope="row">
+          None
+        </td>
+        <td scope="row">
+          {{user.firstName}}
+        </td>
+        <td scope="row">
+          {{user.lastName}}
+        </td>
+        <td scope="row">
+          {{user.email}}
+        </td>
+        <td scope="row">
+          {{user.phone}}
+        </td>
+        <td scope="row">
+          <button mat-raised-button color="warn" (click)="onDeleteLocalStorage(user)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td>Total Users: {{ localStorageUsers.length }}</td>
+      </tr>
+    </tfoot>
+  </table>
+</ng-container>
+
+<div class="py-2">
+  <button mat-raised-button color="primary" (click)="openAddUserDialog()">Add User</button>
+</div>
+
+</div>
+
+
+
+
